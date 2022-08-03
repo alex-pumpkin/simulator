@@ -1,0 +1,41 @@
+= Simple simulator
+
+== Usage
+
+JDK 17 is required.
+
+Run application:
+```bash
+./mvnw spring-boot:run
+```
+
+Connect to WebSocket:
+```bash
+curl -i -N --output - \
+     -H "Connection: Upgrade" \
+     -H "Upgrade: websocket" \
+     -H "Host: localhost:8080" \
+     -H "Origin: http://localhost:8080" \
+     -H "Sec-WebSocket-Key: blahblah" \
+     -H "Sec-WebSocket-Version: 13" \
+     http://localhost:8080/trades
+```
+
+Register "buy" order:
+```bash
+curl -H "Content-Type: application/json" \
+     http://localhost:8080/orders/buy \
+     -d '{"uuid":"1","symbol":"A","price":10,"quantity":80}'
+```
+
+Register "sell" order:
+```bash
+curl -H "Content-Type: application/json" \
+     http://localhost:8080/orders/sell \
+     -d '{"uuid":"2","symbol":"A","price":10,"quantity":100}'
+```
+
+Cancel order:
+```bash
+curl -XDELETE http://localhost:8080/orders/2
+```

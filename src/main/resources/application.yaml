@@ -1,0 +1,6 @@
+logging:
+  level:
+    com:
+      github:
+        alexpumpkin:
+          simulator: DEBUG
